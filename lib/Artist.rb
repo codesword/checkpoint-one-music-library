@@ -42,21 +42,9 @@ class Artist
 	end
 end
 
-# song = Song.new("In an Aeroplane Over the Sea")
-# artist = Artist.new("Neutral Milk Hotel")
-# song.artist = artist
-# puts "this artist sang: #{artist.songs}"
+song = Song.new("In an Aeroplane Over the Sea")
+artist = Artist.new("Neutral Milk Hotel")
+artist.add_song(song)
 
-# artist = Artist.new("In an Aeroplane Over the Sea")
-# puts "name of artist is #{artist.name}"
-# artist.name = "Jump Around"
-# puts "name of artist is #{artist.name}"
-# puts "contents of library: #{Artist.all}"
-# artist.save
-# puts "contents of library: #{Artist.all}"
-# Artist.destroy_all
-# puts "contents of library: #{Artist.all}"
-# artist = Artist.create("In an Aeroplane Over the Sea")
-# puts artist
-# puts "name of artist is #{artist.name}"
-# puts "contents of library: #{Artist.all}"
+puts song.artist
+puts artist

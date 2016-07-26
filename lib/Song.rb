@@ -5,7 +5,7 @@ class Song
 	@@all = []
 
 
-	def initialize song_name, artist=nil
+	def initialize song_name, artist="unknown"
 		@name = song_name
 		@artist = artist
 	end
@@ -30,7 +30,9 @@ class Song
 	end
 
   def artist= an_artist
+    puts "i got here"
     @artist = an_artist
+    puts @artist
     an_artist.add_song(self)
   end
 
