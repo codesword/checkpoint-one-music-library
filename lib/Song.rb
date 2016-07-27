@@ -86,14 +86,14 @@ class Song
   end
 end
 
-genre = Genre.new("indie rock")
+# genre = Genre.new("indie rock")
 
-      neutral_milk_hotel = Artist.new("Neutral Milk Hotel")
-      the_magnetic_fields = Artist.new("The Magnetic Fields")
+#       neutral_milk_hotel = Artist.new("Neutral Milk Hotel")
+#       the_magnetic_fields = Artist.new("The Magnetic Fields")
 
-      Song.new("In an Aeroplane Over the Sea", neutral_milk_hotel, genre)
-      Song.new("The Book of Love", the_magnetic_fields, genre)
-      Song.new("Papa was a Rodeo", the_magnetic_fields, genre)
+#       Song.new("In an Aeroplane Over the Sea", neutral_milk_hotel, genre)
+#       Song.new("The Book of Love", the_magnetic_fields, genre)
+#       Song.new("Papa was a Rodeo", the_magnetic_fields, genre)
 
-      puts genre.artists
-      puts genre.artists.size
+#       puts genre.artists
+#       puts genre.artists.size
