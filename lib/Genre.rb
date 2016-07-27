@@ -1,6 +1,7 @@
 class Genre
 	attr_accessor :name
 	@@all = []
+	@@songs = []
 
 	def initialize genre_name
 		@name = genre_name
@@ -24,18 +25,20 @@ class Genre
 		genre.save
 		genre
 	end
+	
+	def songs
+	  @@songs
+	end
+	
+	def add_song song
+      @song = song.name
+	  if song.genre != self
+	    song.genre = self
+	  end
+	  if !(@@songs.include?(song))
+		@@songs.push(song)
+	  end
+	end
+	
 end
 
-genre = Genre.new("In an Aeroplane Over the Sea")
-puts "name of genre is #{genre.name}"
-genre.name = "Jump Around"
-puts "name of genre is #{genre.name}"
-puts "contents of library: #{Genre.all}"
-genre.save
-puts "contents of library: #{Genre.all}"
-Genre.destroy_all
-puts "contents of library: #{Genre.all}"
-genre = Genre.create("In an Aeroplane Over the Sea")
-puts genre
-puts "name of genre is #{genre.name}"
-puts "contents of library: #{Genre.all}"

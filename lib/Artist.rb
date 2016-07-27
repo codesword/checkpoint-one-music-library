@@ -1,10 +1,11 @@
-require_relative 'Song'
+#require_relative 'Song'
 
 class Artist
 	attr_accessor :name, :song
 
 	@@all = []
 	@@songs = []
+	@@genres = []
 
 	def initialize artist_name, song_name="unknown"
 		@name = artist_name
@@ -35,16 +36,38 @@ class Artist
 	end
 
 	def add_song song
-    @song = song.name
-		if !(@@songs.include?(song))
-			@@songs.push(song)
-		end
+      @song = song.name
+	  if song.artist != self
+	    song.artist = self
+	  end
+	  if !(@@songs.include?(song))
+		@@songs.push(song)
+	  end
+	  if !(@@genres.include?(song.genre))
+	    @@genres.push(song.genre)
+	  end
 	end
+	
+	def genres
+	  @@genres
+	end
+	
 end
 
-song = Song.new("In an Aeroplane Over the Sea")
-artist = Artist.new("Neutral Milk Hotel")
-artist.add_song(song)
 
-puts song.artist
-puts artist
+# artist = Artist.new("Neutral Milk Hotel")
+# song = Song.new("In an Aeroplane Over the Sea", artist)
+# puts song.artist
+# puts "All songs: #{artist.songs}"
+
+# puts "All songs: #{artist.songs}"
+# artist.add_song(song)
+# puts "Length: #{artist.songs.size}\n"
+
+# puts "All songs: #{artist.songs}"
+# artist.add_song(song)
+# puts "Length: #{artist.songs.size}\n"
+
+# puts "All songs: #{artist.songs}"
+# artist.add_song(song)
+# puts "Length: #{artist.songs.size}\n"
