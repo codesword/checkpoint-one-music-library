@@ -1,15 +1,18 @@
 #require_relative 'Song'
 
 class Artist
+  extend Concerns::Findable
 	attr_accessor :name, :song
 
 	@@all = []
-	@@songs = []
-	@@genres = []
+	
 
-	def initialize artist_name, song_name="unknown"
+	def initialize artist_name, song_name=nil
 		@name = artist_name
 		@song = song_name
+    @songs = []
+    @song_genres = []
+
 	end
 
 	def self.all
@@ -32,26 +35,27 @@ class Artist
 	end
 
 	def songs
-		@@songs
+		@songs
 	end
 
 	def add_song song
-      @song = song.name
+    @song = song.name
+
 	  if song.artist != self
 	    song.artist = self
 	  end
-	  if !(@@songs.include?(song))
-		@@songs.push(song)
+	  if !(@songs.include?(song))
+		@songs.push(song)
 	  end
-	  if !(@@genres.include?(song.genre))
-	    @@genres.push(song.genre)
+	  if !(@song_genres.include?(song.genre))
+	    @song_genres.push(song.genre)
 	  end
 	end
-	
+
 	def genres
-	  @@genres
+	  @song_genres
 	end
-	
+
 end
 
 
