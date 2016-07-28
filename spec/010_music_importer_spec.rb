@@ -66,7 +66,7 @@ describe 'Making Songs from filenames' do
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
       expect(song.artist).to eq(artist)
       expect(song.genre).to eq(genre)
-    end
+    end   
   end
 end
 

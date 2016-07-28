@@ -34,8 +34,6 @@ class Genre
 	end
 
 	def add_song song
-      #@song = song.name
-      puts "about to add #{song.artist}"
 	  if song.genre != self
 	    song.genre = self
 	  end
