@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+  require 'spec_helper'
+=======
 require 'spec_helper'
+>>>>>>> c7e112941fce32d7d8f618e057eaf93b1dd35ff1
 
 describe "Artists have many genres through songs" do
   describe '#genres' do
