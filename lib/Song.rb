@@ -7,11 +7,10 @@ class Song
 
   def initialize song_name, artist=nil, genre=nil
     @name = song_name
-
-    @artist = artist #if artist.instance_of?(Artist)
-    @genre = genre #if genre.instance_of?(Genre)
-    artist.add_song(self) if @artist != nil
-    genre.add_song(self) if @genre != nil
+    @genre = genre if genre.instance_of?(Genre)
+    @artist = artist if artist.instance_of?(Artist)
+    self.artist = artist if artist != nil
+    self.genre = genre if genre != nil
 
   end
 
@@ -37,7 +36,8 @@ class Song
   def artist= an_artist
     if @artist != an_artist
       @artist = an_artist
-      puts self.genre
+    end
+    unless an_artist.songs.include?(self) 
       an_artist.add_song(self)
     end
   end
@@ -45,6 +45,9 @@ class Song
   def genre= a_genre
     if @genre != a_genre
       @genre = a_genre
+    end
+
+    unless a_genre.songs.include?(self)
       a_genre.add_song(self)
     end
   end
@@ -69,8 +72,8 @@ class Song
 
   def self.new_from_filename filename
     name = filename.chomp(".mp3").split(" - ")
-    genre = Genre.new(name[2] )
-    artist = Artist.new(name[0])
+    genre = Genre.find_or_create_by_name(name[2])
+    artist = Artist.find_or_create_by_name(name[0])
     song = Song.new(name[1], artist, genre)
     song
   end
@@ -82,15 +85,15 @@ class Song
   end
 end
 
-song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
+# song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
 
 
-puts "song: #{song}"
-puts "is it same? #{Song.find_by_name("For Love I Come")}"
-puts ""
-puts "artist: #{song.artist}"
-puts "is it same? #{Artist.find_by_name("Thundercat")}"
-puts ""
-puts "genre: #{song.genre}"
-puts "is it same? #{Genre.find_by_name("dance")}"
+# puts "song: #{song}"
+# puts "is it same? #{Song.find_by_name("For Love I Come")}"
+# puts ""
+# puts "artist: #{song.artist}"
+# puts "is it same? #{Artist.find_by_name("Thundercat")}"
+# puts ""
+# puts "genre: #{song.genre}"
+# puts "is it same? #{Genre.find_by_name("dance")}"
 

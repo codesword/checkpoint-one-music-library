@@ -6,14 +6,15 @@ class MusicImporter
   def initialize path_name
     @path = path_name
     @files = []
-    #self.files
+    self.files
   end
 
   def files
     Dir.foreach(@path) do |file|
+      # file = file.chomp("mp3")
       #next if file == '.' || file == ".."
       next if File.directory? file || file =~ /^\.\S*/
-      @files.push(file)
+      @files.push(file) unless @files.include?(file)
     end
     @files
     end
@@ -24,16 +25,3 @@ class MusicImporter
     end
   end
 end
-
-# test_music_path = "./spec/fixtures/mp3s"
-# music_importer = MusicImporter.new(test_music_path)
-# music_importer.import
-
-# puts Song.all
-
-# puts "song size: #{Song.all.size}"
-# puts "artist size: #{Artist.all.size}"
-# puts "#{Genre.all.size}"
-
-#puts "green aisles artist name: #{Song.find_by_name("Green Aisles").artist.name}" #=> Real Estate
-# puts "green aisles songs: #{Song.find_by_name("Green Aisles").artist.songs.size}" #=> 2

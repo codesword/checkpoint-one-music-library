@@ -10,11 +10,15 @@ module Concerns::Findable
     end
 
     def find_or_create_by_name name
+      # puts name
+      # puts find_by_name(name)
+      # puts create(name)
       if find_by_name(name)
         return find_by_name(name)
       else
-        create(name)
+        result = create(name)
       end
+      result
     end
 
 end

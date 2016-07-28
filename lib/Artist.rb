@@ -30,8 +30,7 @@ class Artist
   end
 
   def self.create(artist_name)
-    artist = allocate
-    artist.name = artist_name
+    artist = Artist.new(artist_name)
     artist.save
     artist
   end
@@ -46,9 +45,9 @@ class Artist
     if song.artist != self
       song.artist = self
     end
-    if !(@songs.include?(song))
-    @songs.push(song)
-    end
+
+    @songs.push(song) unless @songs.include?(song)
+
     if !(@song_genres.include?(song.genre))
       @song_genres.push(song.genre)
     end

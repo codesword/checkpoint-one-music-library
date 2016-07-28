@@ -2,4 +2,8 @@
 
 require_relative '../config/environment'
 
-MusicLibraryController.new.call
+command = MusicLibraryController.new.call
+
+puts Song.all if command == "list songs"
+
+
