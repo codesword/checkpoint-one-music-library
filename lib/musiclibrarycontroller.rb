@@ -5,13 +5,15 @@ class MusicLibraryController
   end
 
   def call 
-    puts 'Welcome to the Music Library'
-    puts 'type help to get a list of valid commands'
-
-    command = ""
+    command = " "
 
     while command != "exit"
+      puts " "
+      puts "Welcome to the Music Library"
+      puts "What would you like to do? Enter a command"
+      puts "(type help to get a list of valid commands)"
       command = gets.chomp.downcase
+
       puts case command
       when "list songs"
         list_songs
@@ -36,16 +38,18 @@ class MusicLibraryController
   def list_songs
     i = 1
     result = []
+
     @control.files.each do |file|
         result.push("#{i}. #{file.chomp(".mp3")}")
-        #n.b. seperate building of files array from return of the array
         i += 1
     end
+
     result
   end
 
   def list_artists
     result = []
+
     Artist.all.each do |item|
       result.push(item.name)
     end
@@ -54,41 +58,55 @@ class MusicLibraryController
 
   def list_genres
     result = []
+
     Genre.all.each do |item|
       result.push(item.name)
     end
+
     result
   end
 
   def play_song
-    i = 1
-    result = []
-    @control.files.each do |file|
-        result.push("Playing #{file.chomp(".mp3")}")
-        i += 1
+    puts "What song number would like to play? (1 - #{@control.files.length})"
+    index = gets.chomp.to_i
+
+    if index < 1 || index > @control.files.length 
+      puts "Invalid song number"
+    else
+      "Playing #{@control.files[index - 1].chomp(".mp3")}"
     end
-    result
   end
 
   def list_artist
+    puts "Enter the name to search for: "
     name = gets.chomp
     result = Artist.find_by_name(name)
-    result.songs.each do |song|
-      result.genres.each do |genre|
+
+    if result != nil
+      result.songs.each do |song|
+        result.genres.each do |genre|
         puts "#{result.name} - #{song.name} - #{genre.name}"
+        end
       end
+    else
+      puts "Artist not found"
     end
   end
 
   def list_genre
+    puts "Enter the name to search for: "
     name = gets.chomp
     result = Genre.find_by_name(name)
-    result.songs.each do |song|
-      result.artists.each do |artists|
-        puts "#{artists.name} - #{song.name} - #{result.name}"
+
+    if result != nil
+      result.songs.each do |song|
+        result.artists.each do |artists|
+          puts "#{artists.name} - #{song.name} - #{result.name}"
+        end
       end
+    else
+      puts "Genre not found"
     end
-    # result
   end
 
   def list_commands

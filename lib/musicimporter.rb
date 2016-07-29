@@ -1,4 +1,4 @@
-require_relative 'Song'
+require_relative "Song"
 
 class MusicImporter
   attr_reader :path
@@ -6,18 +6,20 @@ class MusicImporter
   def initialize path_name
     @path = path_name
     @files = []
-    self.files
+    self.build_library
+  end
+
+  def build_library
+    Dir.foreach(@path) do |file|
+    next if File.directory? file || file =~ /^\.\S*/
+      @files.push(file) if !(@files.include?(file))
+    end
+
   end
 
   def files
-    Dir.foreach(@path) do |file|
-      # file = file.chomp("mp3")
-      #next if file == '.' || file == ".."
-      next if File.directory? file || file =~ /^\.\S*/
-      @files.push(file) unless @files.include?(file)
-    end
     @files
-    end
+  end
 
   def import
     @files.each do |file|

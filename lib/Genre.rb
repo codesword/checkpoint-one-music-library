@@ -3,29 +3,28 @@ class Genre
     attr_accessor :name
     @@all = []
 
-
     def initialize genre_name
-        @name = genre_name
-        @songs = []
-        @genre_artists = []
+      @name = genre_name
+      @songs = []
+      @genre_artists = []
     end
 
     def self.all
-        @@all
-    end
-
-    def save
-        @@all.push(self)
+      @@all
     end
 
     def self.destroy_all
-        @@all = []
+      @@all = []
+    end
+
+    def save
+      @@all.push(self)
     end
 
     def self.create(genre_name)
-        genre = Genre.new(genre_name)
-        genre.save
-        genre
+      genre = Genre.new(genre_name)
+      genre.save
+      genre
     end
 
     def songs
@@ -33,18 +32,12 @@ class Genre
     end
 
     def add_song song
-      if song.genre != self
-        song.genre = self
-      end
-
+      song.genre = self if song.genre != self
       @songs.push(song)
-      
-      if !(@genre_artists.include?(song.artist))
-        @genre_artists.push(song.artist)
-      end
+      @genre_artists.push(song.artist) if !(@genre_artists.include?(song.artist))
     end
 
     def artists
-        @genre_artists
+      @genre_artists
   end
 end

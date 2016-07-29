@@ -1,5 +1,5 @@
 module Concerns::Findable
-    def find_by_name name
+    def find_by_name(name)
       result = nil
       all.each do |item|
         if item.name == name
@@ -9,10 +9,7 @@ module Concerns::Findable
       result
     end
 
-    def find_or_create_by_name name
-      # puts name
-      # puts find_by_name(name)
-      # puts create(name)
+    def find_or_create_by_name(name)
       if find_by_name(name)
         return find_by_name(name)
       else

@@ -1,5 +1,5 @@
-require_relative 'Artist'
-require_relative 'Genre'
+require_relative "Artist"
+require_relative "Genre"
 
 class Song
   attr_accessor :name, :artist, :genre
@@ -11,24 +11,22 @@ class Song
     @artist = artist if artist.instance_of?(Artist)
     self.artist = artist if artist != nil
     self.genre = genre if genre != nil
-
   end
 
   def self.all
     @@all
   end
 
-  def save
-    @@all.push(self)
-  end
-
   def self.destroy_all
     @@all = []
   end
 
+  def save
+    @@all.push(self)
+  end
+  
   def self.create(song_name)
-    song = allocate
-    song.name = song_name
+    song = Song.new(song_name)
     song.save
     song
   end
@@ -37,7 +35,8 @@ class Song
     if @artist != an_artist
       @artist = an_artist
     end
-    unless an_artist.songs.include?(self) 
+
+    if !(an_artist.songs.include?(self)) 
       an_artist.add_song(self)
     end
   end
@@ -47,7 +46,7 @@ class Song
       @genre = a_genre
     end
 
-    unless a_genre.songs.include?(self)
+    if !(a_genre.songs.include?(self))
       a_genre.add_song(self)
     end
   end
@@ -64,7 +63,7 @@ class Song
 
   def self.find_or_create_by_name song_name
     if Song.find_by_name(song_name)
-      return Song.find_by_name(song_name)
+      Song.find_by_name(song_name)
     else
       Song.create(song_name)
     end
@@ -84,16 +83,3 @@ class Song
     song
   end
 end
-
-# song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
-
-
-# puts "song: #{song}"
-# puts "is it same? #{Song.find_by_name("For Love I Come")}"
-# puts ""
-# puts "artist: #{song.artist}"
-# puts "is it same? #{Artist.find_by_name("Thundercat")}"
-# puts ""
-# puts "genre: #{song.genre}"
-# puts "is it same? #{Genre.find_by_name("dance")}"
-
