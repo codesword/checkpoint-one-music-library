@@ -30,6 +30,6 @@ The valid commands of the application are
 7.) 'help' to list the commands
 8.) 'exit' closes the music library
 
-## How does it work
+## Testing
  - Make sure 'rspec' is installed
  - Run rspec
