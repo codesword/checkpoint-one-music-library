@@ -32,10 +32,6 @@ class Artist
     artist
   end
 
-  # def songs
-  #   @songs
-  # end
-
   def add_song(song)
     @song = song.name
     save

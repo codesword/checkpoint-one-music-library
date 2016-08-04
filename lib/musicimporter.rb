@@ -11,7 +11,7 @@ class MusicImporter
 
   def build_library
     Dir.foreach(@path) do |file|
-      next if File.directory? file # || file =~ /^\.\S*/
+      next if File.directory? file
       @files.push(file) if !@files.include?(file)
     end
   end
