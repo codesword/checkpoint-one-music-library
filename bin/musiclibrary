@@ -3,7 +3,3 @@
 require_relative '../config/environment'
 
 command = MusicLibraryController.new.call
-
-puts Song.all if command == "list songs"
-
-
