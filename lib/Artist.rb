@@ -21,9 +21,7 @@ class Artist
   end
 
   def save
-    if !@@all.include?(self)
-      @@all.push(self)
-    end
+    @@all.push(self) unless @@all.include?(self)
   end
 
   def self.create(artist_name)
@@ -34,10 +32,12 @@ class Artist
 
   def add_song(song)
     @song = song.name
+    
     save
+
     song.artist = self if song.artist != self
-    @songs.push(song) if !@songs.include?(song)
-    @song_genres.push(song.genre) if !@song_genres.include?(song.genre)
+    @songs.push(song) unless @songs.include?(song)
+    @song_genres.push(song.genre) unless @song_genres.include?(song.genre)
   end
 
   def genres
